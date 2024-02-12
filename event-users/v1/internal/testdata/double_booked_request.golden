@@ -1,0 +1,22 @@
+{
+    "events": [
+        {
+            "id": 1,
+            "start": "2023-02-02 13:00",
+            "end": "2023-02-02 14:00",
+            "timezone": "America/Bogota"
+        },
+        {
+            "id": 2,
+            "start": "2023-02-02 16:00",
+            "end": "2023-02-02 18:00",
+            "timezone": "America/Bogota"
+        },
+        {
+            "id": 3,
+            "start": "2023-02-02 13:45",
+            "end": "2023-02-02 16:15",
+            "timezone": "America/Bogota"
+        }
+    ]
+}

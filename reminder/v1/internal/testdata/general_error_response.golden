@@ -1,0 +1,11 @@
+{
+    "errors": [
+        {
+            "id": "ID_GENERAL_ERROR",
+            "status": "500",
+            "code": "CODE_GENERAL_ERROR",
+            "title": "Error",
+            "detail": "error"
+        }
+    ]
+}

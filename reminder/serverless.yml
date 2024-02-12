@@ -1,0 +1,46 @@
+service: reminder-events
+
+frameworkVersion: 3.27.0
+
+provider:
+  name: aws
+  runtime: go1.x
+  region: us-east-1
+  memorySize: 128
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - logs:CreateLogGroup
+        - logs:CreateLogStream
+        - logs:PutLogEvents
+      Resource: arn:aws:logs:*:*:*
+    - Effect: Allow
+      Action:
+        - events:PutRule
+        - events:PutTargets
+      Resource: arn:aws:events:*:*:*
+    - Effect: Allow
+      Action:
+        - dynamodb:Query
+      Resource: "arn:aws:dynamodb:${opt:region, self:provider.region}:*:table/eventstable/index/sk-index"
+    - Effect: Allow
+      Action:
+        - dynamodb:GetItem
+      Resource: "arn:aws:dynamodb:${opt:region, self:provider.region}:*:table/eventstable"
+
+package:
+  individually: true
+
+functions:
+  v1:
+    handler: bin/v1
+    package:
+      patterns:
+        - './bin/v1'
+    timeout: 900
+    events:
+      - schedule:
+          name: user-reminder-cron
+          description: 'Intensidad cada 6 horas UTC-5'
+          rate: cron(0 */6 * * ? *)
+          
