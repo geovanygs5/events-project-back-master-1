@@ -1,3 +1,4 @@
+// Package main have the logic necessary to deploy the main handler
 package main
 
 import (
@@ -13,18 +14,24 @@ import (
 )
 
 type MyObject struct {
-	Pk       string  `json:"pk"`
-	Sk       string  `json:"sk"`
-	Name     string  `json:"name"`
-	Lastname *string `json:"lastname,omitempty"`
-	Gender   *string `json:"gender,omitempty"`
-	Email    *string `json:"email,omitempty"`
-	Phone    *string `json:"phone,omitempty"`
-	EventID  *string `json:"eventid,omitempty"`
-	Capacity *string `json:"capacity,omitempty"`
-	Date     string  `json:"date"`
-	Hour     *string `json:"hour,omitempty"`
-	Status   string  `json:"status"`
+	Pk            string  `json:"pk"`
+	Sk            string  `json:"sk"`
+	Name          string  `json:"name"`
+	Lastname      *string `json:"lastname,omitempty"`
+	Gender        *string `json:"gender,omitempty"`
+	Email         *string `json:"email,omitempty"`
+	Phone         *string `json:"phone,omitempty"`
+	EventID       *string `json:"eventid,omitempty"`
+	Capacity      *string `json:"capacity,omitempty"`
+	Price         *string `json:"price,omitempty"`
+	Date          string  `json:"date"`
+	Hour          *string `json:"hour,omitempty"`
+	Status        string  `json:"status"`
+	UserID        *string `json:"userid,omitempty"`
+	Scholarship   *string `json:"scholarship,omitempty"`
+	Paymentstatus *string `json:"paymentstatus,omitempty"`
+	Bank          *string `json:"bank,omitempty"`
+	Account       *string `json:"account,omitempty"`
 }
 
 func CrearRegistro(ctx context.Context, request events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
@@ -52,7 +59,7 @@ func CrearRegistro(ctx context.Context, request events.APIGatewayProxyRequest) (
 
 	input := &dynamodb.PutItemInput{
 		Item:      av,
-		TableName: aws.String("eventstable"),
+		TableName: aws.String("events-testing-table"),
 	}
 
 	_, err = svc.PutItem(input)

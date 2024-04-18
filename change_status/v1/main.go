@@ -59,7 +59,7 @@ func updateItemStatus(pk string, sk string, newStatus string) error {
 				S: aws.String(sk),
 			},
 		},
-		TableName:        aws.String("eventstable"),
+		TableName:        aws.String("events-testing-table"),
 		UpdateExpression: aws.String("SET #S = :s"),
 	}
 

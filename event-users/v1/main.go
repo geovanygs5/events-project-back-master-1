@@ -11,13 +11,17 @@ import (
 )
 
 type User struct {
-	PK       string `json:"pk"`
-	Name     string `json:"name"`
-	Lastname string `json:"lastname"`
-	Phone    string `json:"phone"`
-	Date     string `json:"date"`
-	Status   string `json:"status"`
-	EventID  string `json:"eventid"`
+	PK            string `json:"pk"`
+	SK            string `json:"sk"`
+	Name          string `json:"name"`
+	Lastname      string `json:"lastname"`
+	Phone         string `json:"phone"`
+	Date          string `json:"date"`
+	Status        string `json:"status"`
+	EventID       string `json:"eventid"`
+	ScholarShip   string `json:"scholarShip"`
+	UserID        string `json:"userID"`
+	PaymentStatus string `json:"paymentStatus"`
 }
 
 func handler(request events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
@@ -34,7 +38,7 @@ func handler(request events.APIGatewayProxyRequest) (events.APIGatewayProxyRespo
 	eventID := request.QueryStringParameters["param"]
 
 	queryInput := &dynamodb.QueryInput{
-		TableName: aws.String("eventstable"),
+		TableName: aws.String("events-testing-table"),
 		IndexName: aws.String("eventid-index"),
 		KeyConditions: map[string]*dynamodb.Condition{
 			"eventid": {

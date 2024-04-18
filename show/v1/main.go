@@ -25,6 +25,9 @@ type Event struct {
 	Gender   string `json:"gender"`
 	Lastname string `json:"lastname"`
 	Phone    string `json:"phone"`
+	Price    string `json:"price"`
+	Bank     string `json:"bank"`
+	Account  string `json:"account"`
 }
 
 func handler(ctx context.Context, request events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
@@ -41,7 +44,7 @@ func handler(ctx context.Context, request events.APIGatewayProxyRequest) (events
 
 	svc := dynamodb.New(sess)
 	input := &dynamodb.QueryInput{
-		TableName: aws.String("eventstable"),
+		TableName: aws.String("events-testing-table"),
 		IndexName: aws.String("sk-index"),
 		KeyConditions: map[string]*dynamodb.Condition{
 			"sk": {
